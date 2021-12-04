@@ -32,7 +32,7 @@ func Run(inputFile string, solver Solver) {
 	}
 
 	fmt.Printf(`
-Solving puzzle: %s
+%s
 Input: %s
 Solution 1: %d
 Solution 2: %d`,

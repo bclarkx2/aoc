@@ -1,6 +1,13 @@
 package main
 
-import "bclarkx2/aoc"
+import (
+	"flag"
+	"log"
+	"os"
+
+	"github.com/bclarkx2/aoc"
+	"github.com/peterbourgon/ff/v3"
+)
 
 type solver struct{}
 
@@ -21,5 +28,9 @@ var (
 )
 
 func main() {
+	if err := ff.Parse(flag.CommandLine, os.Args[1:], ff.WithEnvVarNoPrefix()); err != nil {
+		log.Fatalf("Error parsing flags: %s", err)
+	}
+
 	aoc.Run(*inputFile, &solver{})
 }
