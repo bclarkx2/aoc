@@ -67,7 +67,7 @@ Solution 2: %s`,
 
 func ParseInputFile() string {
 	var inputFile string
-	flag.StringVar(&inputFile, "input", "example.txt", "Input file")
+	flag.StringVar(&inputFile, "input", "puzzle.txt", "Input file")
 
 	if err := ff.Parse(flag.CommandLine, os.Args[1:], ff.WithEnvVarNoPrefix()); err != nil {
 		log.Fatalf("Error parsing flags: %s", err)
@@ -86,4 +86,18 @@ func Integers(strs []string) ([]int, error) {
 		integers = append(integers, integer)
 	}
 	return integers, nil
+}
+
+// Integer power: compute a**b using binary powering algorithm
+// See Donald Knuth, The Art of Computer Programming, Volume 2, Section 4.6.3
+func Pow(a, b int) int {
+	p := 1
+	for b > 0 {
+		if b&1 != 0 {
+			p *= a
+		}
+		b >>= 1
+		a *= a
+	}
+	return p
 }
