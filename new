@@ -1,0 +1,63 @@
+#!/usr/bin/env bash 
+
+usage() {
+  printf '%s\n' "Usage: new [-h] year puzzle
+Generate a new AoC puzzle package.
+
+where:
+  -h, --help  - show this help text"
+}
+
+main() {
+  dir="${YEAR}/${PUZZLE}"
+  mkdir -p "${dir}"
+  cp -r template/* "${dir}"
+}
+
+# Option parsing
+declare PARAMS=""
+while (( "$#" )); do
+  case $1 in
+    -h|--help)  # display help message
+      usage
+      exit 1
+      ;;
+    --)  # End argument parsing
+      shift
+      break
+      ;;
+    -*|--*)  # unsupported flags
+      echo "Unsupported flag: $1" >&2
+      usage
+      exit 1
+      ;;
+    *)  # preserve positional arguments
+      PARAMS="${PARAMS} $1"
+      shift
+      ;;
+  esac
+done
+
+# set positional arguments in their proper place
+eval set -- "${PARAMS}"
+
+# parse positional arguments
+declare YEAR="$1"
+declare PUZZLE="$2"
+
+if [[ -z "${YEAR}" ]]; then
+  echo "Error: missing year positional argument" >&1
+  usage
+  exit 1
+fi
+
+if [[ -z "${PUZZLE}" ]]; then
+  echo "Error: missing puzzle positional argument" >&1
+  usage
+  exit 1
+fi
+
+# Freeze configuration flags
+readonly YEAR PUZZLE
+
+main
