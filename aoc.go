@@ -45,7 +45,7 @@ func Run(inputFile string, solver Solver) {
 	}
 
 	solution2, err2 := solver.Solve2(lines)
-	if err1 != nil {
+	if err2 != nil {
 		output2 = err2.Error()
 	} else {
 		output2 = fmt.Sprintf("%d", solution2)
