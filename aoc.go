@@ -101,3 +101,44 @@ func Pow(a, b int) int {
 	}
 	return p
 }
+
+func Abs(n int) int {
+	return AbsDiff(n, 0)
+}
+
+func AbsDiff(n, m int) int {
+	if n < m {
+		return m - n
+	}
+	return n - m
+}
+
+func Min(ints []int) int {
+	if len(ints) < 1 {
+		panic("Min called on zero length array")
+	}
+
+	min := ints[0]
+	for _, i := range ints {
+		if i < min {
+			min = i
+		}
+	}
+
+	return min
+}
+
+func Max(ints []int) int {
+	if len(ints) < 1 {
+		panic("Max called on zero length array")
+	}
+
+	min := ints[0]
+	for _, i := range ints {
+		if i > min {
+			min = i
+		}
+	}
+
+	return min
+}
