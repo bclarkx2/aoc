@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"sort"
 	"strconv"
 
 	"github.com/peterbourgon/ff/v3"
@@ -141,4 +142,10 @@ func Max(ints []int) int {
 	}
 
 	return min
+}
+
+func SortIntsDescending(ints []int) {
+	sort.Slice(ints, func(i, j int) bool {
+		return ints[i] > ints[j]
+	})
 }
