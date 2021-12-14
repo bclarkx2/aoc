@@ -149,3 +149,21 @@ func SortIntsDescending(ints []int) {
 		return ints[i] > ints[j]
 	})
 }
+
+func Characters(str string) []string {
+	var chars []string
+	for _, r := range str {
+		chars = append(chars, string(r))
+	}
+	return chars
+}
+
+func ContainsStr(lst []string, str string) bool {
+	for _, s := range lst {
+		if s == str {
+
+			return true
+		}
+	}
+	return false
+}
