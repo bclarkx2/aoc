@@ -158,6 +158,14 @@ func Characters(str string) []string {
 	return chars
 }
 
+func IntCharacters(str string) []int {
+	var ints []int
+	for _, r := range str {
+		ints = append(ints, int(r-'0'))
+	}
+	return ints
+}
+
 func ContainsStr(lst []string, str string) bool {
 	for _, s := range lst {
 		if s == str {
