@@ -128,7 +128,7 @@ func (f *frontier) neighbors(p point) []*node {
 	return nearby
 }
 
-func dijkstra_pq(points map[point]int, size int) int {
+func dijkstra(points map[point]int, size int) int {
 	begin := point{0, 0}
 	end := point{size - 1, size - 1}
 
@@ -163,7 +163,7 @@ func (s *solver) Solve1(input []string) (int, error) {
 		}
 	}
 
-	return dijkstra_pq(points, size), nil
+	return dijkstra(points, size), nil
 }
 
 func explode(points map[point]int, size int) map[point]int {
@@ -194,7 +194,7 @@ func (s *solver) Solve2(input []string) (int, error) {
 	}
 
 	exploded := explode(points, size)
-	return dijkstra_pq(exploded, size*5), nil
+	return dijkstra(exploded, size*5), nil
 }
 
 func main() {
