@@ -4,12 +4,6 @@ import (
 	"github.com/bclarkx2/aoc"
 )
 
-type solver struct{}
-
-func (s *solver) Name() string {
-	return "Smoke Basin"
-}
-
 type point struct {
 	height int
 	x      int
@@ -117,6 +111,8 @@ func (p *point) basin(seen map[*point]bool) {
 
 	return
 }
+
+type solver struct{}
 
 func (s *solver) Solve1(input []string) (int, error) {
 	points := newPoints(input)

@@ -4,12 +4,6 @@ import (
 	"github.com/bclarkx2/aoc"
 )
 
-type solver struct{}
-
-func (s *solver) Name() string {
-	return "Dumbo Octopus"
-}
-
 type octopus struct {
 	energy int
 	x      int
@@ -135,6 +129,8 @@ func newOctopi(input []string) octopi {
 
 	return octopi
 }
+
+type solver struct{}
 
 func (s *solver) Solve1(input []string) (int, error) {
 	octopi := newOctopi(input)

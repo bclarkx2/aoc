@@ -9,10 +9,6 @@ import (
 
 type solver struct{}
 
-func (s *solver) Name() string {
-	return "Dive"
-}
-
 func (s *solver) Solve1(input []string) (int, error) {
 	x, y := 0, 0
 

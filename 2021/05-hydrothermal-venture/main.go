@@ -6,11 +6,7 @@ import (
 	"github.com/bclarkx2/aoc"
 )
 
-type solver struct{}
-
-func (s *solver) Name() string {
-	return "Hydrothermal Venture"
-}
+var lineExp = regexp.MustCompile(`(\d+),(\d+) -> (\d+),(\d+)`)
 
 type point struct {
 	x int
@@ -57,7 +53,7 @@ func midpoints(begin, end point) []point {
 	return addrs
 }
 
-var lineExp = regexp.MustCompile(`(\d+),(\d+) -> (\d+),(\d+)`)
+type solver struct{}
 
 func (s *solver) Solve1(input []string) (int, error) {
 

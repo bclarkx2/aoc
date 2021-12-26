@@ -4,12 +4,6 @@ import (
 	"github.com/bclarkx2/aoc"
 )
 
-type solver struct{}
-
-func (s *solver) Name() string {
-	return "Syntax Scoring"
-}
-
 type stack []string
 
 func (s *stack) push(char string) {
@@ -56,6 +50,8 @@ func matches(opening, closing string) bool {
 	}
 	return false
 }
+
+type solver struct{}
 
 func (s *solver) Solve1(input []string) (int, error) {
 	score := 0

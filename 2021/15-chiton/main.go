@@ -6,12 +6,6 @@ import (
 	"github.com/bclarkx2/aoc"
 )
 
-type solver struct{}
-
-func (s *solver) Name() string {
-	return "Chiton"
-}
-
 type point struct {
 	x int
 	y int
@@ -153,19 +147,6 @@ func dijkstra(points map[point]int, size int) int {
 	return frontier.get(end).distance
 }
 
-func (s *solver) Solve1(input []string) (int, error) {
-	points := map[point]int{}
-	size := len(input)
-	for y, line := range input {
-		ints := aoc.IntCharacters(line)
-		for x, risk := range ints {
-			points[point{x, y}] = risk
-		}
-	}
-
-	return dijkstra(points, size), nil
-}
-
 func explode(points map[point]int, size int) map[point]int {
 	exploded := map[point]int{}
 	for p, risk := range points {
@@ -181,6 +162,21 @@ func explode(points map[point]int, size int) map[point]int {
 		}
 	}
 	return exploded
+}
+
+type solver struct{}
+
+func (s *solver) Solve1(input []string) (int, error) {
+	points := map[point]int{}
+	size := len(input)
+	for y, line := range input {
+		ints := aoc.IntCharacters(line)
+		for x, risk := range ints {
+			points[point{x, y}] = risk
+		}
+	}
+
+	return dijkstra(points, size), nil
 }
 
 func (s *solver) Solve2(input []string) (int, error) {

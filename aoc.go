@@ -16,7 +16,6 @@ import (
 type Solver interface {
 	Solve1(input []string) (int, error)
 	Solve2(input []string) (int, error)
-	Name() string
 }
 
 func Run(inputFile string, solver Solver) {
@@ -54,11 +53,9 @@ func Run(inputFile string, solver Solver) {
 	}
 
 	fmt.Printf(`
-%s
 Input: %s
 Solution 1: %s
 Solution 2: %s`,
-		solver.Name(),
 		inputFile,
 		output1,
 		output2,

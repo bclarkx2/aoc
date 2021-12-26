@@ -6,12 +6,6 @@ import (
 	"github.com/bclarkx2/aoc"
 )
 
-type solver struct{}
-
-func (s *solver) Name() string {
-	return "Lanternfish"
-}
-
 type key struct {
 	age  int
 	days int
@@ -57,6 +51,8 @@ func calculate(input []string, days int) (int, error) {
 
 	return count, nil
 }
+
+type solver struct{}
 
 func (s *solver) Solve1(input []string) (int, error) {
 	return calculate(input, 80)

@@ -6,12 +6,6 @@ import (
 	"github.com/bclarkx2/aoc"
 )
 
-type solver struct{}
-
-func (s *solver) Name() string {
-	return "Extended Polymerization"
-}
-
 type pair struct {
 	first  string
 	second string
@@ -134,6 +128,9 @@ func parse(input []string) (string, []rule) {
 
 	return chain, rules
 }
+
+type solver struct{}
+
 func (s *solver) Solve1(input []string) (int, error) {
 	chain, rules := parse(input)
 	return solve(chain, rules, 10), nil

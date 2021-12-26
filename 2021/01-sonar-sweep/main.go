@@ -4,11 +4,18 @@ import (
 	"github.com/bclarkx2/aoc"
 )
 
-type solver struct{}
+func increases(depths []int) int {
+	count := 0
+	for i := 0; i < len(depths)-1; i++ {
+		if depths[i] < depths[i+1] {
+			count++
+		}
+	}
 
-func (s *solver) Name() string {
-	return "Sonar Sweep"
+	return count
 }
+
+type solver struct{}
 
 func (s *solver) Solve1(input []string) (int, error) {
 	depths, err := aoc.Integers(input)
@@ -31,17 +38,6 @@ func (s *solver) Solve2(input []string) (int, error) {
 	}
 
 	return increases(windows), nil
-}
-
-func increases(depths []int) int {
-	count := 0
-	for i := 0; i < len(depths)-1; i++ {
-		if depths[i] < depths[i+1] {
-			count++
-		}
-	}
-
-	return count
 }
 
 func main() {

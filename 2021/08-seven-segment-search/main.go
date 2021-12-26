@@ -9,12 +9,6 @@ import (
 	"github.com/bclarkx2/aoc"
 )
 
-type solver struct{}
-
-func (s *solver) Name() string {
-	return "Seven Segment Search"
-}
-
 type note struct {
 	inputs  []string
 	outputs []string
@@ -26,25 +20,6 @@ func parse(line string) note {
 		inputs:  strings.Split(pieces[0], " "),
 		outputs: strings.Split(pieces[1], " "),
 	}
-}
-
-func (s *solver) Solve1(input []string) (int, error) {
-	var notes []note
-	for _, line := range input {
-		notes = append(notes, parse(line))
-	}
-
-	count := 0
-	for _, note := range notes {
-		for _, digit := range note.outputs {
-			l := len(digit)
-			if l == 2 || l == 3 || l == 4 || l == 7 {
-				count++
-			}
-		}
-	}
-
-	return count, nil
 }
 
 var sevenSegmentValues = map[string]int{
@@ -98,6 +73,27 @@ func value(digit string, mappings map[string]string) int {
 	mappedDigit := strings.Join(mapped, "")
 
 	return sevenSegmentValues[mappedDigit]
+}
+
+type solver struct{}
+
+func (s *solver) Solve1(input []string) (int, error) {
+	var notes []note
+	for _, line := range input {
+		notes = append(notes, parse(line))
+	}
+
+	count := 0
+	for _, note := range notes {
+		for _, digit := range note.outputs {
+			l := len(digit)
+			if l == 2 || l == 3 || l == 4 || l == 7 {
+				count++
+			}
+		}
+	}
+
+	return count, nil
 }
 
 func (s *solver) Solve2(input []string) (int, error) {

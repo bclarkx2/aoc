@@ -8,12 +8,6 @@ import (
 	"github.com/bclarkx2/aoc"
 )
 
-type solver struct{}
-
-func (s *solver) Name() string {
-	return "Giant Squid"
-}
-
 type opportunity map[int]bool
 
 func newOpportunity(vals []int) opportunity {
@@ -92,52 +86,6 @@ func (b *board) unmarkedSum() int {
 	return sum
 }
 
-func (s *solver) Solve1(input []string) (int, error) {
-	draws, boards, err := parse(input)
-	if err != nil {
-		return 0, err
-	}
-
-	for _, draw := range draws {
-		for _, board := range boards {
-			if won := board.record(draw); won {
-				return board.unmarkedSum() * draw, nil
-			}
-		}
-	}
-
-	return 0, errors.New("no answer found")
-}
-
-func (s *solver) Solve2(input []string) (int, error) {
-	draws, boards, err := parse(input)
-	if err != nil {
-		return 0, err
-	}
-
-	winners := map[int]bool{}
-	for _, draw := range draws {
-		for id, board := range boards {
-			// can ignore boards that have already won
-			if _, won := winners[id]; won {
-				continue
-			}
-
-			// can keep going if this board doesn't win
-			if won := board.record(draw); !won {
-				continue
-			}
-
-			winners[id] = true
-			if len(winners) == len(boards) {
-				return board.unmarkedSum() * draw, nil
-			}
-		}
-	}
-
-	return 0, errors.New("no answer found")
-}
-
 func parse(lines []string) ([]int, map[int]board, error) {
 	drawStrs := lines[0]
 	remaining := lines[2:]
@@ -182,6 +130,54 @@ func parse(lines []string) ([]int, map[int]board, error) {
 	}
 
 	return draws, boards, nil
+}
+
+type solver struct{}
+
+func (s *solver) Solve1(input []string) (int, error) {
+	draws, boards, err := parse(input)
+	if err != nil {
+		return 0, err
+	}
+
+	for _, draw := range draws {
+		for _, board := range boards {
+			if won := board.record(draw); won {
+				return board.unmarkedSum() * draw, nil
+			}
+		}
+	}
+
+	return 0, errors.New("no answer found")
+}
+
+func (s *solver) Solve2(input []string) (int, error) {
+	draws, boards, err := parse(input)
+	if err != nil {
+		return 0, err
+	}
+
+	winners := map[int]bool{}
+	for _, draw := range draws {
+		for id, board := range boards {
+			// can ignore boards that have already won
+			if _, won := winners[id]; won {
+				continue
+			}
+
+			// can keep going if this board doesn't win
+			if won := board.record(draw); !won {
+				continue
+			}
+
+			winners[id] = true
+			if len(winners) == len(boards) {
+				return board.unmarkedSum() * draw, nil
+			}
+		}
+	}
+
+	return 0, errors.New("no answer found")
 }
 
 func main() {

@@ -4,34 +4,6 @@ import (
 	"github.com/bclarkx2/aoc"
 )
 
-type solver struct{}
-
-func (s *solver) Name() string {
-	return "Binary-Diagnostics"
-}
-
-func (s *solver) Solve1(input []string) (int, error) {
-	sums := make([]int, len(input[0]))
-	for _, i := range input {
-		for place, d := range i {
-			sums[place] += int(d - '0')
-		}
-	}
-
-	gamma, epsilon := 0, 0
-	for idx, sum := range sums {
-		weight := len(sums) - idx - 1
-		increase := aoc.Pow(2, weight)
-		if sum < (len(input) / 2) {
-			epsilon += increase
-		} else {
-			gamma += increase
-		}
-	}
-
-	return epsilon * gamma, nil
-}
-
 func find(input []string, cmp func(zeroes, ones []string) []string) string {
 	candidates := map[string]bool{}
 	for _, i := range input {
@@ -60,6 +32,30 @@ func find(input []string, cmp func(zeroes, ones []string) []string) string {
 	}
 
 	return ""
+}
+
+type solver struct{}
+
+func (s *solver) Solve1(input []string) (int, error) {
+	sums := make([]int, len(input[0]))
+	for _, i := range input {
+		for place, d := range i {
+			sums[place] += int(d - '0')
+		}
+	}
+
+	gamma, epsilon := 0, 0
+	for idx, sum := range sums {
+		weight := len(sums) - idx - 1
+		increase := aoc.Pow(2, weight)
+		if sum < (len(input) / 2) {
+			epsilon += increase
+		} else {
+			gamma += increase
+		}
+	}
+
+	return epsilon * gamma, nil
 }
 
 func (s *solver) Solve2(input []string) (int, error) {

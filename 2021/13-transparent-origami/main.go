@@ -9,12 +9,6 @@ import (
 	"github.com/bclarkx2/aoc"
 )
 
-type solver struct{}
-
-func (s *solver) Name() string {
-	return "Transparent Origami"
-}
-
 type direction string
 
 const (
@@ -182,6 +176,8 @@ func parse(input []string) ([]point, []fold, error) {
 
 	return points, folds, nil
 }
+
+type solver struct{}
 
 func (s *solver) Solve1(input []string) (int, error) {
 	points, folds, err := parse(input)

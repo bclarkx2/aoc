@@ -6,12 +6,6 @@ import (
 	"github.com/bclarkx2/aoc"
 )
 
-type solver struct{}
-
-func (s *solver) Name() string {
-	return "The Treachery of Whales"
-}
-
 type costFunc func(int, int) int
 
 func naive(positions []int, cost costFunc) int {
@@ -41,6 +35,8 @@ func calculate(input []string, cost costFunc) (int, error) {
 
 	return naive(positions, cost), nil
 }
+
+type solver struct{}
 
 func (s *solver) Solve1(input []string) (int, error) {
 	cost := func(target, position int) int {

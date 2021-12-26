@@ -7,12 +7,6 @@ import (
 	"github.com/bclarkx2/aoc"
 )
 
-type solver struct{}
-
-func (s *solver) Name() string {
-	return "Passage Pather"
-}
-
 type path struct {
 	links          []*cave
 	registry       map[string]int
@@ -182,6 +176,8 @@ func (c *caves) paths(doubleLimit int) []path {
 
 	return paths
 }
+
+type solver struct{}
 
 func (s *solver) Solve1(input []string) (int, error) {
 	caves := newCaves(input)
