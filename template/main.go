@@ -6,10 +6,6 @@ import (
 
 type solver struct{}
 
-func (s *solver) Name() string {
-	return ""
-}
-
 func (s *solver) Solve1(input []string) (int, error) {
 	return 1, nil
 }
