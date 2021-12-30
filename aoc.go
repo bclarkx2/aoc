@@ -8,6 +8,7 @@ import (
 	"os"
 	"sort"
 	"strconv"
+	"time"
 	"unicode"
 
 	"github.com/peterbourgon/ff/v3"
@@ -36,32 +37,44 @@ func Run(inputFile string, solver Solver) {
 		return
 	}
 
-	var output1, output2 string
+	e1 := run(lines, solver.Solve1, "Solution 1")
+	e2 := run(lines, solver.Solve2, "Solution 2")
 
-	solution1, err1 := solver.Solve1(lines)
-	if err1 != nil {
-		output1 = err1.Error()
-	} else {
-		output1 = fmt.Sprintf("%d", solution1)
+	fmt.Printf("\nInput: %s\n", inputFile)
+	fmt.Println(e1)
+	fmt.Println(e2)
+}
+
+func run(input []string, f func([]string) (int, error), label string) execution {
+	start := time.Now()
+	solution, err := f(input)
+	elapsed := time.Since(start)
+	return execution{
+		label:    label,
+		solution: solution,
+		err:      err,
+		elapsed:  elapsed,
 	}
+}
 
-	solution2, err2 := solver.Solve2(lines)
-	if err2 != nil {
-		output2 = err2.Error()
-	} else {
-		output2 = fmt.Sprintf("%d", solution2)
+type execution struct {
+	label    string
+	solution int
+	err      error
+	elapsed  time.Duration
+}
+
+func (e execution) String() string {
+	var output interface{} = e.solution
+	if e.err != nil {
+		output = e.err
 	}
-
-	fmt.Printf(`
-Input: %s
-Solution 1: %s
-Solution 2: %s`,
-		inputFile,
-		output1,
-		output2,
+	return fmt.Sprintf(
+		"%s: %v (%vms)",
+		e.label,
+		output,
+		e.elapsed.Milliseconds(),
 	)
-
-	return
 }
 
 func ParseInputFile() string {
